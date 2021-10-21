@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+
 });
+// Route::get('/login','LoginController@index');
 Route::apiResource('/index', 'HomeController');
-Route::apiResource('/category', 'CategoryController');
+Route::get('/category', 'CategoryController@index');
+Route::post('/category/store', 'CategoryController@store');
 Route::apiResource('/subcategory', 'SubCategoryController');
 

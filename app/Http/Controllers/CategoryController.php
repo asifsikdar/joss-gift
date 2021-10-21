@@ -25,10 +25,7 @@ class CategoryController extends Controller
      */
     public function create(request $request)
     {
-        $data = new CategoryModel();
-        $data->category_name = $request->category_name;
-        $data->save();
-        return redirect()->back();
+
     }
 
     /**
@@ -39,7 +36,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $data = $request->validate(['required','min:4','max:20','unique:category_models']);
+
+        $data = new CategoryModel();
+        $data->category_name = $request->category_name;
+        $data->save();
+        return back()->with('success','Category Added Successfully');
     }
 
     /**
@@ -50,7 +52,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $cat = CategoryModel::all();
+        return response()->json($cat);
     }
 
     /**
@@ -59,9 +62,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(request $request ,$id)
     {
-        //
+
     }
 
     /**
