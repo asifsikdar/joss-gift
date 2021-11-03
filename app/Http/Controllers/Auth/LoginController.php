@@ -54,7 +54,7 @@ class LoginController extends Controller
            }
 
           }else{
-             return redirect('Backend/Login/login')->with('error','Invalid Credentials');
+             return redirect()->route('login')->with('error','Invalid Credentials');
           }
 
     }

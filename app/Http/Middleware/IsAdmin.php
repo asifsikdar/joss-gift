@@ -17,7 +17,9 @@ class IsAdmin
     {
       if(auth()->user()->is_admin==1){
           return $next($request);
+       }else{
+        return redirect()->route('login')->with('error','You cannot access this area');
        }
-        return redirect()->back()->with('error','You cannot access this area');
+
     }
 }

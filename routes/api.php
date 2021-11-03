@@ -18,9 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 
 });
-// Route::get('/login','LoginController@index');
-Route::apiResource('/index', 'HomeController');
-Route::get('/category', 'CategoryController@index');
-Route::post('/category/store', 'CategoryController@store');
-Route::apiResource('/subcategory', 'SubCategoryController');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/category', 'CategoryController@index')->name('category.index')-> middleware('is_admin');
+    Route::post('/category/store', 'CategoryController@store')-> middleware('is_admin');
+    Route::post('/category/update/{id}', 'CategoryController@update')->name('cat.update')-> middleware('is_admin');
+    Route::get('/category_delete/{id}', 'CategoryController@destroy')-> middleware('is_admin');
+    Route::apiResource('/index', 'HomeController')-> middleware('is_admin');
+    Route::post('/subcategory/store', 'SubCategoryController@store')-> middleware('is_admin');
+});
 

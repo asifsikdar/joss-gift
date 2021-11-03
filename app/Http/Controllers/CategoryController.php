@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\CategoryModel;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = CategoryModel::get();
-        return view('Backend.Category.category');
+        return view('Backend.Category.category')->with(compact('category'));
     }
 
     /**
@@ -23,9 +24,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(request $request)
+    public function create()
     {
-
+        //
     }
 
     /**
@@ -36,12 +37,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-    $data = $request->validate(['required','min:4','max:20','unique:category_models']);
+      $data = new CategoryModel();
 
-        $data = new CategoryModel();
-        $data->category_name = $request->category_name;
-        $data->save();
-        return back()->with('success','Category Added Successfully');
+      $data->category_name = $request->category_name;
+      $data->save();
+      Toastr::success('Messages in here', 'Title', ["positionClass" => "toast-top-center"]);
+      return redirect()->route('category.index');
     }
 
     /**
@@ -62,9 +63,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(request $request ,$id)
+    public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -76,7 +77,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $up= CategoryModel::find($id);
+        $up->category_name = $request->category_name;
+        $up->save();
+        return redirect()->back();
     }
 
     /**
@@ -87,6 +91,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dat = CategoryModel::findOrFail($id)->delete();
+        return redirect()->back()->with('delete','Category Deleted');
     }
 }

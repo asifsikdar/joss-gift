@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -402,7 +403,7 @@ to get the desired effect
               </li>
             </ul>
           </li>
-          
+
           <li class="nav-header">Pages</li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -723,7 +724,7 @@ to get the desired effect
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  
+
   @yield('content')
   <!-- /.content-wrapper -->
 
@@ -764,6 +765,9 @@ to get the desired effect
 <script src="{{asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 
+
+
+
 {{-- datatable --}}
 <script>
   $(function () {
@@ -782,5 +786,6 @@ to get the desired effect
     });
   });
 </script>
+
 </body>
 </html>

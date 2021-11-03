@@ -36,7 +36,10 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new SubCategoryModel();
+        $data->subcategory = $request->subcategory;
+        $data->save();
+        return response()->json($data);
     }
 
     /**
